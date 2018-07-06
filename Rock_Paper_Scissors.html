@@ -1,0 +1,84 @@
+<!DOCTYPE = html>
+<meta charset="utf-8"/>
+<html>
+<title>Rock, Paper, Scissors!</title>
+<body>
+  <script>
+  	function computerChoice(){
+  		//returns "Rock", "Paper", or "Scissors" Randomly
+  		switch(Math.floor(Math.random() * 3) + 1){
+  			case 1:
+  			return "rock";
+  			case 2:
+  			return "paper";
+  			default:
+  			return "scissors";
+  		}
+  	};
+
+  	function singleRound(playerSelection, computerSelection){
+  		playerSelection = playerSelection.toLowerCase();
+  		var result;
+
+  		if(playerSelection == computerSelection){
+  		result = 0;
+  		}else if((playerSelection == "rock" && computerSelection == "scissors") || 
+  				(playerSelection == "scissors" && computerSelection == "paper") || 
+  				(playerSelection == "paper" && computerSelection == "rock")){
+  			result = 1;
+  		}else{
+  			result = 2;
+  		};
+  		console.log("Computer  <||>  " + computerSelection + "\nPlayer  <||>  " + 
+  				playerSelection +"\n");
+  		return result;
+  	};
+
+  	function promptPlayer(round){
+  		let playerChoice = prompt("ROUND " + round + " OF 5\nRock, Paper, or Scissors?");
+  		if((playerChoice.toLowerCase() == "rock") || 
+  				(playerChoice.toLowerCase() == "scissors") || 
+  				(playerChoice.toLowerCase() == "paper")){
+  					return playerChoice;
+  		}else{
+  			while(true){
+  				playerChoice = prompt("ROUND " + round + " OF 5\nPlease make a valid choice: 		rock, paper, or scissors");
+  				if((playerChoice.toLowerCase() == "rock") || 
+  						(playerChoice.toLowerCase() == "scissors") || 
+  						(playerChoice.toLowerCase() == "paper")){
+  							break;
+  				};
+  			};
+  			return playerChoice;
+  		}
+  	};
+
+  	function game(){
+  		let n = 0;
+  		let roundNum = 1;
+  		let compWins = 0;
+  		let playerWins = 0;
+  		let draws = 0;
+  		while(n < 5){
+  		  let playerPick = promptPlayer(roundNum);
+  		  let computerPick = computerChoice();
+  		  let outcome = singleRound(playerPick, computerPick);
+  		  if(outcome == 0){
+  		  	draws++;
+  		  }else if(outcome == 1){
+  		  	playerWins++;
+  		  }else{
+  		  	compWins++;
+  		  }
+  		  n++;
+  		  roundNum++;
+  		};
+
+  		return("RESULTS: Player: " + playerWins + " || Computer: " + compWins + " || Draws: " + 	draws);
+  	};
+
+  	console.log(game());
+
+   </script>
+ </body>
+ </html>
